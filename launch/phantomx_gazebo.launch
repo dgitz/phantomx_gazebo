@@ -2,21 +2,20 @@
 
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="world_name" value="$(find phantomx_gazebo)/worlds/test.world"/>
     <arg name="paused" value="true"/>
+     <arg name="verbose" value="false" />
   </include>
   
    <param name="robot_description" textfile="$(find phantomx_description)/urdf/autogen_phantomx.urdf" />  
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find phantomx_description)/urdf/autogen_phantomx.urdf -urdf -model phantomx -z 0.2" />
-
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+    args="-file $(find phantomx_description)/urdf/autogen_phantomx.urdf -urdf -model phantomx -z 0.175" />
 
 
  
  <include file="$(find phantomx_control)/launch/phantomx_control.launch"/> 
 
-
   <node name="phantomx_walker" pkg="phantomx_gazebo" type="walker.py" />
-
 
 
 </launch>
