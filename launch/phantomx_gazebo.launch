@@ -4,7 +4,7 @@
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find phantomx_gazebo)/worlds/test.world"/>
     <arg name="paused" value="true"/>
-     <arg name="verbose" value="false" />
+     <arg name="verbose" value="true" />
   </include>
   
    <param name="robot_description" textfile="$(find phantomx_description)/urdf/autogen_phantomx.urdf" />  
@@ -16,6 +16,6 @@
  <include file="$(find phantomx_control)/launch/phantomx_control.launch"/> 
 
   <node name="phantomx_walker" pkg="phantomx_gazebo" type="walker.py" />
-
+  <node name="gazebo_tf_base_broadcaster" pkg="phantomx_gazebo" type="gazebo_tf_broadcaster.py" respawn="false" output="screen" />
 
 </launch>
