@@ -1,12 +1,13 @@
 <launch>
 
-
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find phantomx_gazebo)/worlds/test.world"/>
+  <arg name="world_name" value="$(find phantomx_gazebo)/worlds/test.world"/>
+
     <arg name="paused" value="true"/>
      <arg name="verbose" value="true" />
+     <arg name="server_required" value="true"/>
+     <arg name="gui_required" value="true"/>
   </include>
-  
    <param name="robot_description" textfile="$(find phantomx_description)/urdf/autogen_phantomx.urdf" />  
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
     args="-file $(find phantomx_description)/urdf/autogen_phantomx.urdf -urdf -model phantomx -z 0.175" />
@@ -17,5 +18,5 @@
 
   <node name="phantomx_walker" pkg="phantomx_gazebo" type="walker.py" />
   <node name="gazebo_tf_base_broadcaster" pkg="phantomx_gazebo" type="gazebo_tf_broadcaster.py" respawn="false" output="screen" />
-
+  <node pkg="tf" type="static_transform_publisher" name="odom_baselink_broadcaster" args="0 0 0 0 0 0 1 odom base_link 100" />
 </launch>
