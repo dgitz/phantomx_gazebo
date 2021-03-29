@@ -13,9 +13,9 @@ def handle_odom(msg):
     br = tf2_ros.TransformBroadcaster()
     t = geometry_msgs.msg.TransformStamped()
 
-    t.header.stamp = rospy.Time.now()
+    t.header.stamp = rospy.Time.now() + rospy.Duration.from_sec(1.0)
     t.header.frame_id = msg.header.frame_id
-    t.child_frame_id = msg.child_frame_id
+    t.child_frame_id = 'odom'#msg.child_frame_id
     t.transform.translation = msg.pose.pose.position
     t.transform.rotation =msg.pose.pose.orientation
     br.sendTransform(t)
